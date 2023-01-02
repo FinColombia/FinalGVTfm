@@ -3,7 +3,7 @@ import time
 from geopy.exc import GeocoderTimedOut
 from geopy.geocoders import Nominatim
 
-geolocator = Nominatim(user_agent="cristhiamdaniel", timeout=10)
+geolocator = Nominatim(user_agent="FiyinK", timeout=10)
 data = pd.read_csv('data1.csv')
 
 def get_direcciones(data):
