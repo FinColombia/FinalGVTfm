@@ -1,6 +1,6 @@
 # FinalGVTfm
 
-Execute:
+Open CMD in the package folder and execute:
 
 ```bash
 python procesamientoDirecciones.py
