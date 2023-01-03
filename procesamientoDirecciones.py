@@ -1,8 +1,9 @@
 import re
 import pandas as pd
-
 # cargamos el dataframe
-df = pd.read_csv('Phidias_Address.csv')
+url= r'C:\Users\fiyin\OneDrive\Documents\UNIR\2nd Semester\tfm final\GV Data\Current\Code\Diamante_Psuedonym.xlsx'
+df = pd.read_excel(url)
+df['Direccion']= df['Direccion'].astype(str)
 # Funcion para separar un numero de una letra
 def split_number_letter(lista):
     for i in range(len(lista)):
@@ -13,7 +14,7 @@ def split_number_letter(lista):
 # Funcion para extraer la columna 'Dirección' del dataframe
 def get_address(df):
     address = []
-    for i in df['Dirección']:
+    for i in df['Direccion']:
         address.append(i)
     return address
 
@@ -43,6 +44,12 @@ def replace_address(direcciones_split):
             i[0] = 'Calle'
         elif i[0] == 'Cll':
             i[0] = 'Calle'
+        elif i[0] == 'Clle':
+            i[0] = 'Calle'
+        elif i[0] == 'Calle':
+            i[0] = 'Calle'
+        elif i[0] == 'Carrera':
+            i[0] = 'Carrera'
         elif i[0] == 'CR':
             i[0] = 'Carrera'
         elif i[0] == 'Cr':
@@ -51,11 +58,19 @@ def replace_address(direcciones_split):
             i[0] = 'Carrera'
         elif i[0] == 'Kr':
             i[0] = 'Carrera'
+        elif i[0] == 'Kra':
+            i[0] = 'Carrera'
         elif i[0] == 'DG':
+            i[0] = 'Diagonal'
+        elif i[0] == 'Diagonal':
             i[0] = 'Diagonal'
         elif i[0] == 'TV':
             i[0] = 'Transversal'
+        elif i[0] == 'Transversal':
+            i[0] = 'Transversal'
         elif i[0] == 'Tv':
+            i[0] = 'Transversal'
+        elif 'Tran' in i[0]:
             i[0] = 'Transversal'
         else:
             i[0] = '*'
@@ -121,13 +136,39 @@ def concatenate_list(direcciones_split):
 # Funcion que agrega la ciudad y pais a la direccion
 def add_text(direcciones):
     for i in range(len(direcciones)):
-        direcciones[i] = direcciones[i] + ', Bogotá, Colombia'
+
+        if 'Chia' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Chia, Colombia'
+        elif 'Chía' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Chia, Colombia'
+        elif 'Cajica' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Cajica, Colombia'
+        elif 'Zipa' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Zipaquira, Colombia'
+        elif 'Sopo' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Sopo, Colombia'
+        elif 'Cota' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Cota, Colombia'
+        elif 'Faca' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Facatativá, Colombia'
+        elif 'Mosq' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Mosquera, Colombia'
+        elif 'Madrid' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Madrid, Colombia'
+        elif 'Calera' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', La Calera, Colombia'
+        elif 'Tocan' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Tocancipá, Colombia'
+        elif 'Funza' in direcciones[i]:
+            direcciones[i] = direcciones[i] + ', Funza, Colombia'          
+        else:
+            direcciones[i] = direcciones[i] + ', Bogotá, Colombia'
     return direcciones
 
 # Funcion que agrega la columna 'Dirección' al dataframe
 def add_column(direcciones):
     df['Direcciones'] = direcciones
-    df.to_csv('Direcciones.csv', index=False)
+    df.to_csv('Direcciones_Diamante.csv', index=False)
     return df
 
 def main():
@@ -141,7 +182,7 @@ def main():
     address = concatenate_list(address_split)
     address = add_text(address)
     data = add_column(address)
-    data.to_csv('data1.csv', index=False)
+    data.to_csv('data1_Diamante.csv', index=False)
 
 if __name__ == '__main__':
-    main()
+   main()
